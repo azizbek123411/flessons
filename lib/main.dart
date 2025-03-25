@@ -1,9 +1,11 @@
-import 'package:app1/provider/home_page.dart';
-import 'package:app1/provider/provider.dart';
+import 'package:app1/provider/counter/home_page.dart';
+import 'package:app1/provider/counter/provider.dart';
+import 'package:app1/provider/todo/todo_home.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'provider/todo/todo_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,10 +15,15 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (BuildContext context) => Counter(Hive.box<int>('counterBox')),
-            ),
+          create: (BuildContext context) => Counter(
+            Hive.box<int>('counterBox'),
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => TodoProvider(),
+        ),
       ],
-       child: const MyApp(),
+      child: const MyApp(),
     ),
   );
 }
@@ -32,7 +39,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
       ),
-      home: const HomePage(),
+      // home: const HomePage(),
+      home: TodoHome(),
     );
   }
 }

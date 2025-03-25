@@ -1,4 +1,4 @@
-import 'package:app1/provider/provider.dart';
+import 'package:app1/provider/counter/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
