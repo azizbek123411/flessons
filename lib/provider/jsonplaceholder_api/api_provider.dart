@@ -38,8 +38,44 @@ class UserProvider with ChangeNotifier {
       final newUser = UserModel.fromJson(jsonDecode(response.body));
       users.add(newUser);
       notifyListeners();
-    }else{
+    } else {
       throw Exception("Foydalanuvchi qo'shishda xatolik");
     }
   }
+
+  /// PUT
+
+  Future<void> updateUser(String email, String name, int id) async {
+    final response = await http.put(
+      Uri.parse("$apiUrl/$id"),
+      headers: {"Content-Type": "application/json"},
+      body: ({"name": name, "email": email},),
+    );
+
+    if(response.statusCode==200){
+      final updatedUser=UserModel.fromJson(jsonDecode(response.body),);
+      int index=users.indexWhere((user)=>user.id==id);
+      if(index != -1){
+        users[index]=updatedUser;
+        notifyListeners();
+      }
+    }else{
+      throw Exception('Foydalanuvchi yangilanishida xatolik');
+    }
+  }
+
+
+  ///DELETE
+  
+  Future<void> deleteUser(int id)async{
+    final response=await http.delete(Uri.parse("$apiUrl/$id"));
+
+    if(response.statusCode==200){
+      users.removeWhere((user)=>user.id==id);
+      notifyListeners();
+    }else{
+      throw Exception("Foydalanuvchini o'chirishda xatolik");
+    }
+  }
+
 }
