@@ -38,7 +38,7 @@ class TodoProvider extends ChangeNotifier {
   }
 
   void removeTodo(int index) {
-    _todos[index].delete();
+    _todos.removeAt(index);
     notifyListeners();
   }
 
