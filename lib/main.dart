@@ -1,6 +1,7 @@
 import 'package:app1/provider/counter/home_page.dart';
 import 'package:app1/provider/counter/provider.dart';
 import 'package:app1/provider/todo/todo_home.dart';
+import 'package:app1/provider/todo/todo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox<int>('counterBox');
+  await Hive.openBox<TodoModel>('todos');
   runApp(
     MultiProvider(
       providers: [

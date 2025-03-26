@@ -5,36 +5,38 @@ import 'package:provider/provider.dart';
 class TodoHome extends StatelessWidget {
   TodoHome({super.key});
   final textController = TextEditingController();
-  void _editTodoDialog(BuildContext context,int index){
-  final tdProvider=Provider.of<TodoProvider>(context,listen: false);
-  final controller=TextEditingController(text: tdProvider.todos[index].title);
 
-  showDialog(context: context, builder: (context){
-    return AlertDialog(
-      actions: [
-        TextButton(onPressed: ()=>Navigator.pop(context), child: Text('Cancel')),
-        TextButton(onPressed: (){
-          tdProvider.editTodo(controller.text, index);
-          Navigator.pop(context);
-        }, child: Text('Save')),
-      ],
-      title: Text('Edit todos'),
-      content: TextField(
-      
-        controller: controller,
-        decoration: InputDecoration(
-          hintText: 'New title'
-        ),
-      
-      ),
-    );
-  });
-}
+  void _editTodoDialog(BuildContext context, int index) {
+    final tdProvider = Provider.of<TodoProvider>(context, listen: false);
+    final controller =
+        TextEditingController(text: tdProvider.todos[index].title);
 
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            actions: [
+              TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: Text('Cancel')),
+              TextButton(
+                  onPressed: () {
+                    tdProvider.editTodo(controller.text, index);
+                    Navigator.pop(context);
+                  },
+                  child: Text('Save')),
+            ],
+            title: Text('Edit todos'),
+            content: TextField(
+              controller: controller,
+              decoration: InputDecoration(hintText: 'New title'),
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
-  
     final todoProvider = Provider.of<TodoProvider>(context);
     return Scaffold(
       body: Column(
@@ -59,13 +61,31 @@ class TodoHome extends StatelessWidget {
               ),
             ),
           ),
+          PopupMenuButton<FilterOption>(
+              onSelected: (filter) {
+                todoProvider.setFilter(filter);
+              },
+              itemBuilder: (context) => [
+                    PopupMenuItem(
+                      child: Text('All'),
+                      value: FilterOption.all,
+                    ),
+                    PopupMenuItem(
+                      child: Text('Completed'),
+                      value: FilterOption.completed,
+                    ),
+                    PopupMenuItem(
+                      child: Text('Pending'),
+                      value: FilterOption.pending,
+                    ),
+                  ]),
           Expanded(
             child: ListView.builder(
-              itemCount: todoProvider.todos.length,
+              itemCount: todoProvider.filteredTodos.length,
               itemBuilder: (context, index) {
-                final todos = todoProvider.todos[index];
+                final todos = todoProvider.filteredTodos[index];
                 return ListTile(
-                  onTap: ()=>   _editTodoDialog(context, index),
+                  onTap: () => _editTodoDialog(context, index),
                   trailing: IconButton(
                     onPressed: () => todoProvider.removeTodo(index),
                     icon: Icon(
