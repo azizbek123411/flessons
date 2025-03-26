@@ -1,11 +1,11 @@
-import 'package:app1/provider/counter/home_page.dart';
 import 'package:app1/provider/counter/provider.dart';
-import 'package:app1/provider/todo/todo_home.dart';
+import 'package:app1/provider/jsonplaceholder_api/api_home.dart';
 import 'package:app1/provider/todo/todo_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
+import 'provider/jsonplaceholder_api/api_provider.dart';
 import 'provider/todo/todo_provider.dart';
 
 void main() async {
@@ -23,6 +23,9 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => TodoProvider(),
+        ),
+        ChangeNotifierProvider(
+          create:(context)=>UserProvider(),
         ),
       ],
       child: const MyApp(),
@@ -42,7 +45,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
       ),
       // home: const HomePage(),
-      home: TodoHome(),
+      // home: TodoHome(),
+      home: ApiHome(),
     );
   }
 }

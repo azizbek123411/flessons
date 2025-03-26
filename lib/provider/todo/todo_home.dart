@@ -67,16 +67,16 @@ class TodoHome extends StatelessWidget {
               },
               itemBuilder: (context) => [
                     PopupMenuItem(
-                      child: Text('All'),
                       value: FilterOption.all,
+                      child: Text('All'),
                     ),
                     PopupMenuItem(
-                      child: Text('Completed'),
                       value: FilterOption.completed,
+                      child: Text('Completed'),
                     ),
                     PopupMenuItem(
-                      child: Text('Pending'),
                       value: FilterOption.pending,
+                      child: Text('Pending'),
                     ),
                   ]),
           Expanded(
