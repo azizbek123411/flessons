@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:app1/provider/jsonplaceholder_api/model.dart';
 import 'package:flutter/material.dart';
@@ -45,22 +46,23 @@ class UserProvider with ChangeNotifier {
 
   /// PUT
 
-  Future<void> updateUser(String email, String name, int id) async {
+  Future<void> updateUser(int id, String name, String email) async {
     final response = await http.put(
-      Uri.parse("$apiUrl/$id"),
+      Uri.parse("https://jsonplaceholder.typicode.com/posts/$id"),
       headers: {"Content-Type": "application/json"},
-      body: ({"name": name, "email": email},),
+      body: jsonEncode({"title": name, "body": email}),
     );
-
-    if(response.statusCode==200){
-      final updatedUser=UserModel.fromJson(jsonDecode(response.body),);
-      int index=users.indexWhere((user)=>user.id==id);
-      if(index != -1){
-        users[index]=updatedUser;
+print("Status Code: ${response.statusCode}");
+  print("Response Body: ${response.body}");
+    if (response.statusCode == 200) {
+      final updatedUser = UserModel.fromJson(jsonDecode(response.body));
+      int index = users.indexWhere((user) => user.id == id);
+      if (index != -1) {
+        users[index] = updatedUser;
         notifyListeners();
       }
-    }else{
-      throw Exception('Foydalanuvchi yangilanishida xatolik');
+    } else {
+      throw Exception("Foydalanuvchi malumotlarini yangilashda xatolik yuz berdi!",);
     }
   }
 
