@@ -39,7 +39,7 @@ class ApiHome extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   userProvider.addUser(
-                      nameController.text, emailController.text);
+                      nameController.text, {});
                   Navigator.pop(context);
                 },
                 child: Text('Add'),
@@ -51,7 +51,7 @@ class ApiHome extends StatelessWidget {
 
  void _showEditUserDialog(BuildContext context, UserProvider userProvider, UserModel user) {
     final nameController = TextEditingController(text: user.name);
-    final emailController = TextEditingController(text: user.email);
+    final emailController = TextEditingController();
 
     showDialog(
       context: context,
@@ -73,7 +73,7 @@ class ApiHome extends StatelessWidget {
             ElevatedButton(
               child: Text("Update"),
               onPressed: () {
-                userProvider.updateUser(user.id, nameController.text, emailController.text);
+                // userProvider.updateUser(user.id, nameController.text, emailController.text);
                 Navigator.pop(context);
               },
             ),
@@ -88,11 +88,9 @@ class ApiHome extends StatelessWidget {
     final userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(title: Text('Users')),
-      body: userProvider.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : ListView.builder(
+      body:
+         
+          ListView.builder(
               itemCount: userProvider.users.length,
               itemBuilder: (context, index) {
                 final user = userProvider.users[index];
@@ -102,10 +100,10 @@ class ApiHome extends StatelessWidget {
                     user.name,
                     style: TextStyle(color: Colors.black),
                   ),
-                  subtitle: Text(user.email),
+                  // subtitle: Text(user.email),
                   trailing: IconButton(
                     onPressed: () {
-                      userProvider.deleteUser(user.id);
+                      // userProvider.deleteUser(user.id);
                     },
                     icon: Icon(Icons.delete),
                   ),
