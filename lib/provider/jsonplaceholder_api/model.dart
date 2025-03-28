@@ -1,7 +1,7 @@
 class UserModel {
-  final int id;
+  final String id;
   final String name;
-  final Map<String,dynamic> data;
+  final Map<String, dynamic> data;
 
   UserModel({
     required this.id,
@@ -13,13 +13,12 @@ class UserModel {
     return UserModel(
       id: json['id'],
       name: json['name'],
-data: json['data']??{},
+      data: json['data'] ?? {},
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      
       'name': name,
       'data': data,
     };

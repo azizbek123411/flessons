@@ -46,7 +46,7 @@ class UserProvider with ChangeNotifier {
   /// PUT
 
   Future<void> updateUser(
-      int id, String name, Map<String, dynamic> data) async {
+      String id, String name, Map<String, dynamic> data) async {
     final response = await http.put(
       Uri.parse("$apiUrl/$id"),
       headers: {"Content-Type": "application/json"},
