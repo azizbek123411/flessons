@@ -87,7 +87,7 @@ class TodoHome extends StatelessWidget {
                 return ListTile(
                   onTap: () => _editTodoDialog(context, index),
                   trailing: IconButton(
-                    onPressed: () => todoProvider.removeTodo(index),
+                    onPressed: () => context.read<TodoProvider>().removeTodo(index),
                     icon: Icon(
                       Icons.remove,
                     ),

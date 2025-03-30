@@ -50,7 +50,7 @@ class _ApiHomeState extends State<ApiHome> {
     final users = userProvider.users;
     return Scaffold(
       appBar: AppBar(title: Text('Users')),
-      body: users.isEmpty
+      body: userProvider.isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
