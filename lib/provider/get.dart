@@ -41,7 +41,7 @@ class _HomeeState extends State<Homee> {
   @override
   initState() {
     super.initState();
-    Provider.of<ApiService>(context, listen: false).getObjects();
+    Provider.of<ApiService>(context,listen: false).getObjects();
   }
 
   @override

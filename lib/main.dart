@@ -3,7 +3,9 @@ import 'package:app1/provider/get.dart';
 import 'package:app1/provider/jsonplaceholder_api/api_home.dart';
 import 'package:app1/provider/todo/todo_home.dart';
 import 'package:app1/provider/todo/todo_model.dart';
+import 'package:app1/riverpod/counter/counter_home.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -16,25 +18,7 @@ void main() async {
   await Hive.openBox<int>('counterBox');
   await Hive.openBox<TodoModel>('todos');
   runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (BuildContext context) => Counter(
-            Hive.box<int>('counterBox'),
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => TodoProvider(),
-        ),
-        ChangeNotifierProvider(
-          create:(context)=>UserProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => ApiService(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
+    ProviderScope(child: const MyApp()),
   );
 }
 
@@ -52,7 +36,7 @@ class MyApp extends StatelessWidget {
       // home: const HomePage(),
       // home: TodoHome(),
       // home: ApiHome(),
-      home: Homee(),
+      home: CounterHome(),
     );
   }
 }
