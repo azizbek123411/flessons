@@ -10,6 +10,7 @@ class Todoriverscreen extends ConsumerWidget {
     final todos = ref.watch(todoRiverProvider);
     final todoNotifier = ref.watch(todoRiverProvider.notifier);
     final controller = TextEditingController();
+    final editTitle=TextEditingController();
 
     return Scaffold(
       appBar: AppBar(
@@ -40,6 +41,26 @@ class Todoriverscreen extends ConsumerWidget {
               itemCount: todos.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  onTap: (){
+                    showDialog(context: context, builder: (context){
+                      return AlertDialog(
+                        title: Text('Edit Todo'),
+                        content: TextField(
+                          controller: editTitle,
+                          decoration: InputDecoration(hintText: 'Enter new title'),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              todoNotifier.editTodo(todos[index].id, editTitle.text);
+                              Navigator.pop(context);
+                            },
+                            child: Text('Save'),
+                          ),
+                        ],
+                      );
+                    });
+                  },
                   title: Text(
                     todos[index].title,
                     style: TextStyle(

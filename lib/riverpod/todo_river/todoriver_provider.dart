@@ -12,6 +12,16 @@ class TodoriverProvider extends StateNotifier<List<TodoRiverModel>>{
     ];
   }
 
+
+  void editTodo(String id,String newTitle){
+    state=state.map((todo){
+      if(todo.id==id){
+        return todo.copyWith(title:newTitle);
+      }
+      return todo;  
+    }).toList();
+  }
+
   void toggleTodo(String id){
     state=state.map((todo){
       if(todo.id==id){
