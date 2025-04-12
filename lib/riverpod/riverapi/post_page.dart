@@ -163,6 +163,14 @@ class PostPage extends ConsumerWidget {
     );
   }
 
+  void showSnackbar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final postsState = ref.watch(postProvider);
@@ -201,7 +209,10 @@ class PostPage extends ConsumerWidget {
                     ),
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () => notifier.deletePost(post.id),
+                      onPressed: ()  {
+                        notifier.deletePost(post.id);
+                        showSnackbar(context, 'Post Deleted');
+                      },
                     ),
                   ],
                 ),
