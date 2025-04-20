@@ -1,4 +1,5 @@
 import 'package:app1/provider/todo/todo_model.dart';
+import 'package:app1/riverpod/future/ui.dart';
 import 'package:app1/riverpod/riverapi/post_page.dart';
 import 'package:app1/riverpod/todo_river/todoriverScreen.dart';
 import 'package:flutter/material.dart';
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
       ),
 
       // home: CounterHome(),
-      home: Todoriverscreen(),
+      // home: Todoriverscreen(),
       // home: PostPage(),
+      home: Ui(),
     );
   }
 }
