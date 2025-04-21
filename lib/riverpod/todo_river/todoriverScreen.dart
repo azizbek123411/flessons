@@ -10,7 +10,7 @@ final filterProvider = StateProvider<FilterType>((ref) => FilterType.all);
 class Todoriverscreen extends ConsumerWidget {
   Todoriverscreen({super.key});
 
-  final filteredTodosProvider = Provider<List<TodoRiverModel>>((ref) {
+  final filteredTodosProvider = StateProvider<List<TodoRiverModel>>((ref) {
     final filter = ref.watch(filterProvider);
     final todos = ref.watch(todoRiverProvider);
     switch (filter) {
@@ -19,7 +19,6 @@ class Todoriverscreen extends ConsumerWidget {
       case FilterType.uncompleted:
         return todos.where((todo) => !todo.isCompleted).toList();
       case FilterType.all:
-      default:
         return todos;
     }
   });

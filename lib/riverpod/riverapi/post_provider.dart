@@ -39,7 +39,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 
-
 // final postProvider =
 //     AsyncNotifierProvider<PostNotifier, List<PostModel>>(PostNotifier.new);
 
@@ -81,13 +80,31 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 
-final postServiceProvider=Provider((ref)=>PostService());
+final postServiceProvider=Provider<PostService>((ref)=>PostService());
+
+
+
+
 /// REPOSITORY QILINDGANDA
-final postRepositoryProvider = Provider((ref) {
+final postRepositoryProvider = Provider<PostRepository>((ref) {
   final service = ref.read(postServiceProvider);
   return PostRepository(service);
 });
+
+
+
+
+
+
+
+
+
+
 final postProvider=AsyncNotifierProvider<PostNotifier,List<PostModel>>(PostNotifier.new);
+
+
+
+
 
 class PostNotifier extends AsyncNotifier<List<PostModel>>{
   late PostRepository repo;

@@ -5,5 +5,5 @@ class FutureRepository {
   final FutureService service;
   FutureRepository({required this.service});
 
-Future<List<FutureModel>> getUsers()=>service.getUsers();
+  Future<List<FutureModel>> getUsers() => service.getUsers();
 }
