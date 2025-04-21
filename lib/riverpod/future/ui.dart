@@ -20,12 +20,12 @@ class Ui extends ConsumerWidget {
             itemCount: data.length,
             itemBuilder: (context,index){
             return ListTile(
-              title: Text(data[index].name),
+              title: Text(data[index].title),
             );
           });
         }),
-        error: (e, _) => Center(
-          child: Text("Xatolik:$e"),
+        error: (e, st) => Center(
+          child: Text("Xatolik:$e st:$st"),
         ),
         loading: () => Center(
           child: CircularProgressIndicator(),

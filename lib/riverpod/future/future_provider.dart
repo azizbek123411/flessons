@@ -15,3 +15,14 @@ final futureProvider = FutureProvider<List<FutureModel>>((ref) async {
   final repository = ref.read(futureRepositoryProvider);
   return await repository.getUsers();
 });
+
+
+final createFuture=FutureProvider.family<FutureModel,FutureModel>((ref,model)async{
+  final res=ref.read(futureRepositoryProvider);
+  return res.createFuture(model);
+});
+
+final editFuture=FutureProvider.family<FutureModel,FutureModel>((ref,model)async{
+  final res=ref.read(futureRepositoryProvider);
+  return res.updateFuture(model);
+});

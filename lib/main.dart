@@ -32,8 +32,8 @@ class MyApp extends StatelessWidget {
 
       // home: CounterHome(),
       // home: Todoriverscreen(),
-      home: PostPage(),
-      // home: Ui(),
+      // home: PostPage(),
+      home: Ui(),
     );
   }
 }
