@@ -26,3 +26,8 @@ final editFuture=FutureProvider.family<FutureModel,FutureModel>((ref,model)async
   final res=ref.read(futureRepositoryProvider);
   return res.updateFuture(model);
 });
+
+final deleteFuture=FutureProvider.family<void,int>((ref,id)async{
+  final res=ref.read(futureRepositoryProvider);
+  await res.deleteFuture(id);
+});

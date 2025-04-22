@@ -24,4 +24,10 @@ class FutureModel{
       'body':body,
     };
   }
+
+
+  FutureModel copyWith({String? title,String? body,int? id}){
+    return FutureModel(
+      title: title??this.title, id: id??this.id, body: body??this.body);
+  }
 }
