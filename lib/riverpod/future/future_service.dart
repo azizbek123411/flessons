@@ -20,6 +20,7 @@ class FutureService {
     final res = await http.post(
       Uri.parse(baseUrl),
       body: jsonEncode(model.toJson()),
+      headers: {'Content-Type': 'application/json'}
     );
     if (res.statusCode == 201) {
       return FutureModel.fromJson(jsonDecode(res.body));
@@ -34,6 +35,7 @@ class FutureService {
       body: jsonEncode(
         model.toJson(),
       ),
+      headers: {'Content-Type': 'application/json'},
     );
 
     if (res.statusCode == 200) {
