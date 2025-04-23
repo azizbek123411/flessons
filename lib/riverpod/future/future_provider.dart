@@ -3,7 +3,7 @@ import 'package:app1/riverpod/future/future_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// service provider
-final serviceProvider = Provider<FutureService>((ref) => FutureService());
+final serviceProvider = Provider((ref) => FutureService());
 
 
 
